@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Data Form</title>
+</head>
+<body>
+  <form action="/getEmployeeData" method="post">
+    <label for="employeeId">Select Employee:</label>
+    <select id="employeeId" name="id" required>
+      <% employees.forEach((employee) => { %>
+        <option value="<%= employee.id %>"><%= employee.name %> (ID: <%= employee.id %>)</option>
+      <% }); %>
+    </select>
+    <br>
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" required>
+    <br>
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" required>
+    <br>
+    <button type="submit">Get Employee Data</button>
+  </form>
+</body>
+</html>

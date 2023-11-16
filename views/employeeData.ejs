@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Data</title>
+</head>
+<body>
+  <h1>Employee Data</h1>
+  <% if (employeeData.length === 0) { %>
+    <p>No data found for the specified criteria.</p>
+  <% } else { %>
+    <% employeeData.forEach((employee) => { %>
+      <h2><%= employee.name %> (ID: <%= employee.id %>)</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Attendance</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let totalAttendance = 0; %>
+          <% let totalAmount = 0; %>
+          <% let salary = employee.salary || 0; %>
+          <% employee.records.forEach((record) => { %>
+            <tr>
+              <td><%= record.date %></td>
+              <td><%= record.attendance %></td>
+              <td><%= record.amount %></td>
+            </tr>
+            <% totalAttendance += parseFloat(record.attendance) || 0; %>
+            <% totalAmount += parseFloat(record.amount) || 0; %>
+          <% }); %>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td><strong><%= totalAttendance.toFixed(2) %></strong></td>
+            <td><strong><%= totalAmount.toFixed(2) %></strong></td>
+          </tr>
+          <tr>
+            <td ><strong>Total Salary</strong></td>
+            <td><strong><%= (totalAttendance * salary).toFixed(2) %></strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- vscode-html-validate-ignore -->
+      <h3 style="color: <%= (totalAttendance * salary - totalAmount) < 0 ? 'red' : '#00ff08' %>;">
+        Balance: <%= (totalAttendance * salary - totalAmount).toFixed(2) %>
+      </h3>
+      
+    <% }); %>
+  <% } %>
+  
+</body>
+</html>

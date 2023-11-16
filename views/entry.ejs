@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Records</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Employee Records</h1>
+
+  <form method="post" action="/update">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Attendance</th>
+        <th>Amount</th>
+      </tr>
+      <% for (let i = 0; i < employees.length; i++) { %>
+        <tr>
+          <td><%= employees[i].id %></td>
+          <td><%= employees[i].name %></td>
+          <td>
+            <label><input type="checkbox" name="attendance_<%= employees[i].id %>_0.5" value="0.5" <%= employees[i].record.attendance == 0.5 ? 'checked' : '' %>/> 0.5</label>
+            <label><input type="checkbox" name="attendance_<%= employees[i].id %>_1" value="1" <%= employees[i].record.attendance == 1 ? 'checked' : '' %>/> 1</label>
+
+          </td>
+          <td>
+            <input type="number" name="amount_<%= employees[i].id %>" value="<%= employees[i].record.amount %>" />
+          </td>
+        </tr>
+      <% } %>
+    </table>
+    <input type="hidden" name="date" value="<%=employees[0].date%>" />
+    <button type="submit">Update</button>
+  </form>
+
+  <h2>Date: <%= employees[0].date %></h2> <!-- Assuming date is the same for all employees -->
+</body>
+</html>
+
