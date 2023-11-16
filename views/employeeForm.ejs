@@ -4,6 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Data Form</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('startDate').value = getDefaultStartDate();
+      document.getElementById('endDate').value = getDefaultEndDate();
+    });
+
+    function getDefaultStartDate() {
+      const today = new Date();
+      const lastMonth = new Date(today);
+      lastMonth.setMonth(today.getMonth() - 1);
+
+      return formatDate(lastMonth);
+    }
+
+    function getDefaultEndDate() {
+      return formatDate(new Date());
+    }
+
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+  </script>
 </head>
 <body>
   <form action="/getEmployeeData" method="post">
