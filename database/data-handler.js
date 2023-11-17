@@ -27,6 +27,17 @@ async function saveEmployeeData(newEmployee) {
     // Create an array if it doesn't exist
     const employeeArray = Array.isArray(employees) ? employees : [];
 
+    // Check if the name already exists
+    if (employeeArray.some(employee => employee.name === newEmployee.name)) {
+      // Name already exists, return an alert or throw an error
+      console.error('Employee with the same name already exists. Please choose a different name.');
+      // You can also throw an error if you want to handle it differently in the calling code
+      // throw new Error('Employee with the same name already exists.');
+
+      // You may also choose to return here if you want to exit the function
+      return;
+    }
+
     // Generate a unique ID for the new employee
     let newId = 1;
     while (employeeArray.some(employee => employee.id == newId.toString())) {
