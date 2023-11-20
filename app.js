@@ -11,10 +11,6 @@ const entryRouter = require('./routes/entry.js');
 
 app.use('/',entryRouter);
 
-
-
-
-
 app.get('/', (req, res) => {
   res.render('calender');
 });

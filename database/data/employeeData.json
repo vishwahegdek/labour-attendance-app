@@ -1,0 +1,85 @@
+[
+  {
+    "id": "1",
+    "name": "lakshmisha",
+    "salary": "650",
+    "records": [
+      {
+        "date": "2023-11-01",
+        "amount": "500"
+      },
+      {
+        "date": "2023-11-12",
+        "attendance": "1",
+        "amount": ""
+      },
+      {
+        "date": "2023-11-13",
+        "attendance": "1",
+        "amount": ""
+      },
+      {
+        "date": "2023-11-14",
+        "attendance": "0.5",
+        "amount": ""
+      },
+      {
+        "date": "2023-11-15",
+        "amount": ""
+      },
+      {
+        "date": "2023-11-16",
+        "amount": "500"
+      },
+      {
+        "date": "2023-11-17",
+        "attendance": "1",
+        "amount": "300"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Adam",
+    "salary": "550",
+    "records": [
+      {
+        "date": "2023-11-01",
+        "attendance": "1",
+        "amount": "1000"
+      },
+      {
+        "date": "2023-11-12",
+        "amount": ""
+      },
+      {
+        "date": "2023-11-13",
+        "amount": ""
+      },
+      {
+        "date": "2023-11-14",
+        "attendance": "1",
+        "amount": "600"
+      },
+      {
+        "date": "2023-11-15",
+        "attendance": "1",
+        "amount": "300"
+      },
+      {
+        "date": "2023-11-16",
+        "attendance": "0.5",
+        "amount": "500"
+      },
+      {
+        "date": "2023-11-17",
+        "amount": ""
+      }
+    ]
+  },
+  {
+    "name": "ramesh",
+    "salary": "500",
+    "id": "3"
+  }
+]
