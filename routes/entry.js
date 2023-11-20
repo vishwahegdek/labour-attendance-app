@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { saveEmployeeData, updateEmployeeRecords ,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData} = require('../database/mongo');
+const { saveEmployeeData, updateEmployeeRecords ,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData} = require('../database/data-handler');
 
 
 
