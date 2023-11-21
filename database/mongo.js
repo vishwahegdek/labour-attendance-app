@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://vishwahegdek:F0FJA6aOz7HtLdKi@cluster0.dj4mlzp.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://vishwahegdek:F0FJA6aOz7HtLdKi@cluster0.dj4mlzp.mongodb.net/test?retryWrites=true&w=majority');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -133,6 +133,9 @@ async function getEmployeesDataByDate(date) {
       };
     });
 
+    // Sort employeesData based on id in ascending order
+    employeesData.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+
     return employeesData;
 
   } catch (error) {
@@ -157,6 +160,9 @@ async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
         const recordDate = new Date(rec.date);
         return recordDate >= new Date(startDate) && recordDate <= new Date(endDate);
       });
+
+      // Sort filteredRecords based on date
+      filteredRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       return {
         id: employee.id,
