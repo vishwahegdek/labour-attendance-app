@@ -18,6 +18,31 @@ async function loadEmployeeData() {
   }
 }
 
+async function updateEmployeeDetails(data) {
+  try {
+    for (const employeeData of data) {
+      const { id, name, salary } = employeeData;
+
+      // Find the corresponding employee in the database based on the 'id'
+      const existingEmployee = await Employee.findOne({ id });
+
+      if (existingEmployee) {
+        // Update the employee's name and salary
+        existingEmployee.name = name;
+        existingEmployee.salary = salary;
+
+        // Save the changes
+        await existingEmployee.save();
+        console.log(`Employee with id ${id} updated successfully.`);
+      } else {
+        console.log(`Employee with id ${id} not found in the database.`);
+      }
+    }
+  } catch (error) {
+    console.error('Error updating employees in MongoDB:', error.message);
+  }
+}
+
 
 
 async function saveEmployeeData(newEmployee) {
@@ -180,5 +205,5 @@ async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
 }
 
 
-module.exports = { saveEmployeeData,updateEmployeeRecords,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData}
+module.exports = { saveEmployeeData,updateEmployeeRecords,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData,updateEmployeeDetails}
 

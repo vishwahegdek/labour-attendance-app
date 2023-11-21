@@ -15,11 +15,6 @@ app.get('/', (req, res) => {
   res.render('calender');
 });
 
-app.get('/newjoin',(req,res) => {
-  res.render('newemp');
-});
-
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });

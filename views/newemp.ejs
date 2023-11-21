@@ -4,22 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Form</title>
+    <style>
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Employee Information Form</h1>
+    <h1>Employee Information</h1>
+    <a href="/">Home</a>
 
-    <!-- Form to input employee details -->
+    <!-- Form to edit existing employee details -->
     <form action="/submitemp" method="post">
-        <label for="employeeName">Employee Name:</label>
-        <input type="text" id="employeeName" name="name" required>
+        <% employees.forEach((employee) => { %>
+            <label for="employeeName<%= employee.id %>">Employee Name:</label>
+            <input type="text" id="employeeName<%= employee.id %>" name="name" value="<%= employee.name %>" required>
+
+            <br>
+            <label for="employeeSalary<%= employee.id %>">Employee Salary:</label>
+            <input type="text" id="employeeSalary<%= employee.id %>" name="salary" value="<%= employee.salary %>" required>
+
+            <br>
+            <!-- Display ID for existing employees -->
+            <label for="employeeId<%= employee.id %>">Employee ID:</label>
+            <input type="text" id="employeeId<%= employee.id %>" name="id" value="<%= employee.id %>" readonly>
+
+            <hr>
+        <% }); %>
+
+        <button type="submit">Update Existing Employees</button>
+    </form>
+    <hr>
+
+    <!-- Form to add a new employee -->
+    <form action="/addemp" method="post">
+        <label for="newEmployeeName">New Employee Name:</label>
+        <input type="text" id="newEmployeeName" name="name" required>
 
         <br>
-        <label for="employeeSalary">Employee Salary:</label>
-        <input type="text" id="employeeSalary" name="salary" required>
+        <label for="newEmployeeSalary">New Employee Salary:</label>
+        <input type="text" id="newEmployeeSalary" name="salary" required>
 
-        <br>
+        <hr>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Add New Employee</button>
     </form>
 </body>
 </html>
