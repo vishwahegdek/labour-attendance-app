@@ -28,16 +28,16 @@
     <!-- Form to edit existing employee details -->
     <form action="/submitemp" method="post">
         <% employees.forEach((employee) => { %>
-            <label for="employeeName<%= employee.id %>">Employee Name:</label>
+            <label for="employeeName<%= employee.id %>">Name:</label>
             <input type="text" id="employeeName<%= employee.id %>" name="name" value="<%= employee.name %>" required>
 
             <br>
-            <label for="employeeSalary<%= employee.id %>">Employee Salary:</label>
+            <label for="employeeSalary<%= employee.id %>">Salary:</label>
             <input type="text" id="employeeSalary<%= employee.id %>" name="salary" value="<%= employee.salary %>" required>
 
             <br>
             <!-- Display ID for existing employees -->
-            <label for="employeeId<%= employee.id %>">Employee ID:</label>
+            <label for="employeeId<%= employee.id %>">ID:</label>
             <input type="text" id="employeeId<%= employee.id %>" name="id" value="<%= employee.id %>" readonly>
 
             <hr>

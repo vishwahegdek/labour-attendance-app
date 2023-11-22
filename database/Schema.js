@@ -10,7 +10,8 @@ const empSchema = new mongoose.Schema({
   id:Number,
   name:String,
   salary:Number,
+  startDate: String,
   records:[recordSchema]
-},{collection:"employees"})
+},{collection:"test"})
 
 module.exports = mongoose.model("Employee",empSchema)

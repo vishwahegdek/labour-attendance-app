@@ -6,22 +6,34 @@
   <title>Employee Data Form</title>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('startDate').value = getDefaultStartDate();
-      document.getElementById('endDate').value = getDefaultEndDate();
+      const employeeForms = document.querySelectorAll('.employee-form');
+  
+      <% employees.forEach((employee, index) => { %>
+        (function() {
+          const currentForm = employeeForms[<%= index %>];
+          const startDateInput = currentForm.querySelector('.start-date');
+          const endDateInput = currentForm.querySelector('.end-date');
+  
+          startDateInput.value = getDefaultStartDate('<%= employee.startDate %>');
+          endDateInput.value = getDefaultEndDate();
+        })();
+      <% }); %>
     });
-
-    function getDefaultStartDate() {
+  
+    function getDefaultStartDate(startDate) {
+      if (startDate) {
+        return startDate;
+      }
+  
       const today = new Date();
-      const lastMonth = new Date(today);
-      lastMonth.setMonth(today.getMonth() - 1);
-
-      return formatDate(lastMonth);
+      const defaultStartDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      return formatDate(defaultStartDate);
     }
-
+  
     function getDefaultEndDate() {
       return formatDate(new Date());
     }
-
+  
     function formatDate(date) {
       const year = date.getFullYear();
       const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -29,23 +41,24 @@
       return `${year}-${month}-${day}`;
     }
   </script>
+  
+  
 </head>
 <body>
-  <form action="/getEmployeeData" method="post">
-    <label for="employeeId">Select Employee:</label>
-    <select id="employeeId" name="id" required>
-      <% employees.forEach((employee) => { %>
-        <option value="<%= employee.id %>"><%= employee.name %> (ID: <%= employee.id %>)</option>
-      <% }); %>
-    </select>
-    <br>
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="startDate" required>
-    <br>
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="endDate" required>
-    <br>
-    <button type="submit">Get Employee Data</button>
-  </form>
+  <% employees.forEach((employee) => { %>
+    <form action="/getEmployeeData" method="post" class="employee-form">
+      <label for="employeeId_<%= employee.id %>"><%= employee.name %></label>
+      <input type="hidden" name="id" value="<%= employee.id %>" id="employeeId_<%= employee.id %>_hidden" />
+      <button type="submit">Get Data</button>
+      <br>
+      <label for="startDate_<%= employee.id %>">Start :</label>
+      <input type="date" id="startDate_<%= employee.id %>" name="startDate" class="start-date" required>
+      <br>
+      <label for="endDate_<%= employee.id %>">End :</label>
+      <input type="date" id="endDate_<%= employee.id %>" name="endDate" class="end-date" required>
+      <br>
+    </form>
+    <hr>
+  <% }); %>
 </body>
 </html>
