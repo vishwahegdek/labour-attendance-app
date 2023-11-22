@@ -12,6 +12,6 @@ const empSchema = new mongoose.Schema({
   salary:Number,
   startDate: String,
   records:[recordSchema]
-},{collection:"test"})
+},{collection:"employee"})
 
 module.exports = mongoose.model("Employee",empSchema)
