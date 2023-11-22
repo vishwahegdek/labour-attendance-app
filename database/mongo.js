@@ -179,7 +179,10 @@ async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
       return [];
     }
 
-    const result = employees.map((employee) => {
+    const result = await Promise.all(employees.map(async (employee) => {
+      employee.startDate = startDate;
+      // Save the changes to the database
+      await employee.save();
       const records = employee.records || [];
       const filteredRecords = records.filter((rec) => {
         const recordDate = new Date(rec.date);
@@ -195,8 +198,8 @@ async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
         records: filteredRecords,
         salary: employee.salary,
       };
-    });
-
+    }));
+    console.log(employees)
     return result;
   } catch (error) {
     console.error('Error getting employee data by id and date range:', error.message);
