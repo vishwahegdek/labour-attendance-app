@@ -19,7 +19,7 @@
 </head>
 <body>
   <h1>Employee Records</h1>
-
+  <h2>Date: <%= employees[0].date %></h2>
   <form method="post" action="/update">
     <table>
       <tr>
@@ -44,10 +44,10 @@
       <% } %>
     </table>
     <input type="hidden" name="date" value="<%=employees[0].date%>" />
-    <button type="submit">Update</button>
+    <button class="update-button" type="submit">Update</button>
   </form>
 
-  <h2>Date: <%= employees[0].date %></h2> <!-- Assuming date is the same for all employees -->
+  
 </body>
 </html>
 

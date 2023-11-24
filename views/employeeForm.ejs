@@ -48,7 +48,7 @@
 <body>
   <% employees.forEach((employee) => { %>
     <form action="/getEmployeeData" method="post" class="employee-form">
-      <label for="employeeId_<%= employee.id %>"><%= employee.name %></label>
+      <label class="empname" for="employeeId_<%= employee.id %>"><%= employee.name %></label>
       <input type="hidden" name="id" value="<%= employee.id %>" id="employeeId_<%= employee.id %>_hidden" />
       <button type="submit">Get Data</button>
       <br>

@@ -16,8 +16,12 @@
         <% employees.forEach((employee) => { %>
             <label for="employeeName<%= employee.id %>">Name:</label>
             <input type="text" id="employeeName<%= employee.id %>" name="name" value="<%= employee.name %>" required>
-            <label for="employeeDelete<%= employee.id %>">Remove:</label>
-            <input type="checkbox" id="employeeDelete<%= employee.id %>" name="delete" value="<%= employee.id %>">
+            
+            <!-- Updated checkbox markup -->
+            <label class="checkbox-container" for="employeeDelete<%= employee.id %>">
+                <input type="checkbox" id="employeeDelete<%= employee.id %>" name="delete" value="<%= employee.id %>">
+                <span>Remove</span>
+            </label>
             
             <br>
             <label for="employeeSalary<%= employee.id %>">Salary:</label>
