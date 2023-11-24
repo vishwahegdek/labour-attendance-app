@@ -123,4 +123,10 @@ label {
   width :100%;
   position: fixed;
   bottom: 0;
+  z-index: 999;
+  height: 60px;
+}
+
+.last-row{
+  height: 60px;
 }
