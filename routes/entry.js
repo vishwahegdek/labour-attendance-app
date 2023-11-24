@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { saveEmployeeData, updateEmployeeRecords ,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData,updateEmployeeDetails} = require('../database/mongo');
+const { removeEmployee, addRemovedEmployee,saveEmployeeData, updateEmployeeRecords ,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData,updateEmployeeDetails} = require('../database/mongo');
 
 
 
@@ -44,23 +44,8 @@ router.post('/addemp',async (req,res) =>{
 });
 
 router.post('/submitemp',async (req,res) =>{
-  const employeeCount = req.body.name.length;
-
-  // Restructure the form data
-  const employeesData = [];
-  for (let i = 0; i < employeeCount; i++) {
-      const employee = {
-          name: req.body.name[i],
-          salary: req.body.salary[i],
-          id: req.body.id[i]
-      };
-      employeesData.push(employee);
-  }
-
-  // Now 'employeesData' contains an array of objects, each representing an employee
-
-  // Your further processing logic here...
-  console.log(employeesData)
+  console.log(req.body)
+  const employeesData = req.body;
   updateEmployeeDetails(employeesData)
 
   // Set the content type to HTML

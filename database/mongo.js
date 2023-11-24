@@ -10,7 +10,7 @@ const Employee = require("./Schema.js");
 
 async function loadEmployeeData() {
   try {
-    const employees = await Employee.find();
+    const employees = await Employee.find({active :true});
     return employees;
   } catch (error) {
     console.error('Error loading employee data:', error.message);
@@ -18,8 +18,42 @@ async function loadEmployeeData() {
   }
 }
 
-async function updateEmployeeDetails(data) {
+async function removeEmployee(id) {
+  const employee = await Employee.findOne({id});
+  employee.active = false;
+  employee.id = null;
+  employee.save();
+}
+async function addRemovedEmployee(id) {
+  const employee = await Employee.findOne({id});
+  employee.active = true;
+  employee.save();
+}
+
+async function restructureData(data){
+  const employeeCount = data.name.length;
+  // Restructure the form data
+  const employeesData = [];
+  for (let i = 0; i < employeeCount; i++) {
+      const employee = {
+          name: data.name[i],
+          salary: data.salary[i],
+          id: data.id[i]
+      };
+      employeesData.push(employee);
+  }
+  if (data.delete && typeof data.delete === "string"){
+    console.log(data.delete)
+    const deletingEmployee = await Employee.findOne({ id:data.delete });
+    deletingEmployee.id = null;
+    deletingEmployee.active = false;
+    await deletingEmployee.save();
+  }
+  return employeesData;
+}
+async function updateEmployeeDetails(empdata) {
   try {
+    const data = await restructureData(empdata)
     for (const employeeData of data) {
       const { id, name, salary } = employeeData;
 
@@ -56,15 +90,19 @@ async function saveEmployeeData(newEmployee) {
     }
 
     // Generate a unique ID for the new employee
-    const lastEmployee = await Employee.findOne().sort({ id: -1 }).limit(1);
     let newId = 1;
+    while(true){
+      const existingEmpId = await Employee.findOne({ id: newId })
 
-    if (lastEmployee) {
-      newId = parseInt(lastEmployee.id) + 1;
+      if (!existingEmpId){
+        break;
+      }
+      newId++;
     }
 
     // Assign the generated ID to the new employee
     newEmployee.id = newId.toString();
+    newEmployee.active = true;
 
     // Save the new employee to the database
     const savedEmployee = await Employee.create(newEmployee);
@@ -145,7 +183,7 @@ function transformInputData(inputData) {
 
 async function getEmployeesDataByDate(date) {
   try {
-    const employees = await Employee.find();
+    const employees = await Employee.find({active :true});
 
     const employeesData = employees.map((employee) => {
       const records = employee.records || [];
@@ -172,7 +210,7 @@ async function getEmployeesDataByDate(date) {
 
 async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
   try {
-    const employees = await Employee.find({ id: id });
+    const employees = await Employee.find({ id: id, active : true });
 
     if (employees.length === 0) {
       console.log(`No employee found with id ${id}`);
@@ -208,5 +246,5 @@ async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
 }
 
 
-module.exports = { saveEmployeeData,updateEmployeeRecords,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData,updateEmployeeDetails}
+module.exports = {removeEmployee, addRemovedEmployee,saveEmployeeData,updateEmployeeRecords,getEmployeesDataByDate,getEmployeesDataByIdAndDateRange,loadEmployeeData,updateEmployeeDetails}
 
