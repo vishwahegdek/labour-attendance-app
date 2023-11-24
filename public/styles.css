@@ -94,6 +94,10 @@ label {
   color:rgb(255, 166, 0);
   font-size: 30px;
 }
+.check-box input[type="checkbox"]{
+  width: 15px;
+
+}
 
 
 /* Updated CSS for the checkbox */

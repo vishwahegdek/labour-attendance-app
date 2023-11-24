@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <title>Employee Records</title>
   <link rel="stylesheet" type="text/css" href="/styles.css">
   <style>
@@ -33,8 +33,8 @@
           <td><%= employees[i].id %></td>
           <td><%= employees[i].name %></td>
           <td>
-            <label><input type="checkbox" name="attendance_<%= employees[i].id %>_0.5" value="0.5" <%= employees[i].record.attendance == 0.5 ? 'checked' : '' %>/> 0.5</label>
-            <label><input type="checkbox" name="attendance_<%= employees[i].id %>_1" value="1" <%= employees[i].record.attendance == 1 ? 'checked' : '' %>/> 1</label>
+            <label class="check-box"><input type="checkbox" name="attendance_<%= employees[i].id %>_0.5" value="0.5" <%= employees[i].record.attendance == 0.5 ? 'checked' : '' %>/> 0.5</label>
+            <label class="check-box"><input type="checkbox" name="attendance_<%= employees[i].id %>_1" value="1" <%= employees[i].record.attendance == 1 ? 'checked' : '' %>/> 1</label>
 
           </td>
           <td>
