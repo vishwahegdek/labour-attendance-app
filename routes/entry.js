@@ -18,9 +18,25 @@ router.get('/entry-route', async (req, res) => {
   }
 });
 
-router.post('/update',(req,res) =>{
+router.post('/update',async (req,res) =>{
   const newRecords = req.body;
-  updateEmployeeRecords(newRecords)
+  await updateEmployeeRecords(newRecords)
+
+  // Set the content type to HTML
+  res.setHeader('Content-Type', 'text/html');
+  // Send a message
+  res.write('Form submitted successfully. Redirecting...');
+  // Redirect using client-side JavaScript after a delay (e.g., 2 seconds)
+  res.write(`
+    <script>
+      setTimeout(function() {
+        window.location.href = '/';
+      }, 2000);
+    </script>
+  `);
+
+  // End the response
+  res.end();
 });
 
 // Route handler to render the form
@@ -46,7 +62,7 @@ router.post('/addemp',async (req,res) =>{
 router.post('/submitemp',async (req,res) =>{
   console.log(req.body)
   const employeesData = req.body;
-  updateEmployeeDetails(employeesData)
+  await updateEmployeeDetails(employeesData)
 
   // Set the content type to HTML
   res.setHeader('Content-Type', 'text/html');
