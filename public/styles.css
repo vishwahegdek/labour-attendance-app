@@ -38,7 +38,8 @@ input {
   padding: 10px;
   font-size: 16px;
   width: 100px;
-  background-color: rgb(194, 128, 255);
+  /*background-color: rgb(194, 128, 255);*/
+  background-color: #ddd;
 }
 
 table {
@@ -59,7 +60,8 @@ th {
 
 td {
   background-color: #4d4d4d;
-  color: rgb(255, 162, 0);
+  /*color: rgb(255, 162, 0);*/
+  color:white
 }
 
 a {
@@ -92,6 +94,7 @@ label {
 }
 .empname{
   color:rgb(255, 166, 0);
+  color:white;
   font-size: 30px;
 }
 .check-box input[type="checkbox"]{
