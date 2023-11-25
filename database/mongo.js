@@ -221,12 +221,12 @@ async function getEmployeesDataByIdAndDateRange(id, startDate, endDate) {
       employee.startDate = startDate;
       // Save the changes to the database
       await employee.save();
-      const records = employee.records || [];
-      const filteredRecords = records.filter((rec) => {
+      const records1 = employee.records || [];
+      const records = records1.filter((rec) => {
         const recordDate = new Date(rec.date);
         return recordDate >= new Date(startDate) && recordDate <= new Date(endDate);
       });
-
+      const filteredRecords = records.filter((rec) =>rec.attendance || rec.amount)
       // Sort filteredRecords based on date
       filteredRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
 
