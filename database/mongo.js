@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://vishwahegdek:F0FJA6aOz7HtLdKi@cluster0.dj4mlzp.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://vishwahegdek:n22eQ2XVpXxFBDZs@cluster0.dj4mlzp.mongodb.net/test?retryWrites=true&w=majority');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
