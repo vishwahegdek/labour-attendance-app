@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const connectionString = require("../cofig.js")
 
-mongoose.connect('mongodb+srv://vishwahegdek:n22eQ2XVpXxFBDZs@cluster0.dj4mlzp.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect(connectionString.mongoURI);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

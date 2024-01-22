@@ -1,12 +1,22 @@
-const http = require('http');
-const PORT = 3000;
+const express = require('express')
+const app = express()
+const ejs = require('ejs')
+const port = 3000
+const path = require('path');
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.set('view engine','ejs');
+app.use(express.static(path.join(__dirname, 'public')));
+
+const entryRouter = require('./routes/entry.js');
+
+app.use('/',entryRouter);
+
+app.get('/', (req, res) => {
+  res.render('calender');
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
 });
