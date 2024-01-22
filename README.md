@@ -35,7 +35,7 @@ This project is aimed at maintaining the attendance of daily laborers and managi
 4. Run the application:
 
    ```bash
-   npm start
+   node index.js
    ```
 
 ## Usage
